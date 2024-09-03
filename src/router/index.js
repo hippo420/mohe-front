@@ -1,44 +1,26 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
     // 도메인으로 접속시 리다이렉트 설정
     path: '/',
+    name: '/',
+    component: () => import(/* webpackChunkName: "about" */ '../components/HelloWorld.vue')
   },
   {
-    name: 'view',
-    path: '/view',
-    children : [
-          {
-
-            name: 'chatting',
-            path: 'chatting',
-            children : [
-              {
-                name: 'chatting-list',
-                path: 'chatting-list',
-                component: () => import('@/view/chatting/ChattingList.vue'),
-              },
-              {
-                name: 'chatting-detail',
-                path: ':id',
-                component: () => import('@/view/chatting/ChattingDetail.vue'),
-              }
-            ]
-          },
-        ]
+    name: '/chatting-list',
+    path: '/chatting-list',
+    component: () => import('@/view/chatting/ChattingList.vue'),
+  },
+  {
+    name: '/chatting-detail',
+    path: '/:id',
+    component: () => import('@/view/chatting/ChattingDetail.vue'),
   }
 ]
 
-// 베이스속성이 prefix입니다
-// 베이스속성이 prefix입니다
-// 베이스속성이 prefix입니다
-const router = new VueRouter({
-  // base: "/view",
-  mode: 'history',
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

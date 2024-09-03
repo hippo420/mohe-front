@@ -25,7 +25,7 @@
             class="im-on"
           />
           <img
-            :src="room.AVATAR_PATH"
+            src="room.AVATAR_PATH"
             alt="img"
           >
         </div>
@@ -154,7 +154,7 @@ export default {
     display: flex;
     .img-box {
 
-      img {
+      .img {
       width : 54px;
       height : 54px;
       border-radius: 16px;
@@ -169,8 +169,8 @@ export default {
         border: 1.5px solid #F8F8FA;
         border-radius: 100%;
       }
-      position: relative;
-      margin-right : 12px;
+      //position: relative;
+      //margin-right : 12px;
     }
     .info-box {
       display: flex;

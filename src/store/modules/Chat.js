@@ -234,7 +234,9 @@ export default {
             },
           ]),
         };
-        const res =  await axiosCommonWithAuth(url, method, data);
+
+        const res = method+url+data;
+        //const res =  await axiosCommonWithAuth(url, method, data);
         let chatRooms = res.data.data
         console.log(chatRooms,'챗룸')
         // 받아온 채팅방 목록에서, USER_ID가 null이 아니라면 ( 채팅을 한번이라도 했다면 )
@@ -289,7 +291,9 @@ export default {
             },
           ]),
         };
-        await axiosCommonWithAuth(url, method, data);
+
+        console.log( method+url+data);
+        //await axiosCommonWithAuth(url, method, data);
       }
       catch(e){
         console.log(e)
@@ -329,6 +333,8 @@ export default {
           console.log('받아온 url을 db로 보낼 때 생기는 오류')
           console.log(e)
         }
+
+
 
 
 
