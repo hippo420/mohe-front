@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 const routes = [
   {
     // 도메인으로 접속시 리다이렉트 설정
     path: '/',
     name: '/',
-    component: () => import(/* webpackChunkName: "about" */ '../components/HelloWorld.vue')
+    component: () => import('@/view/HelloMohe.vue')
   },
   {
     name: '/chatting-list',
     path: '/chatting-list',
+    //component: ChattingList,
     component: () => import('@/view/chatting/ChattingList.vue'),
   },
   {

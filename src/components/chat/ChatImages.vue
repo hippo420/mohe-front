@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="only-chat-image">
     <div :class="{'len1': returnLength === 1, 'len2': returnLength === 2, 'len3' : returnLength === 3,'len4' : returnLength === 4,'len5' : returnLength >= 5 }">
       <img

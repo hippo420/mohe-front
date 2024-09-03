@@ -18,6 +18,7 @@ const INITIAL_STATE = {
   },
   errorState : false
 };
+
 const showCreated = (time) =>{
   // return time.slice(11,16)
   let hour = Number(time.slice(11,13))

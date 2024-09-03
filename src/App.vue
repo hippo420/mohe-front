@@ -1,19 +1,22 @@
 <template>
   <div>
-    <!-- axios사용시 로딩을 을 보여주기위해 사용 -->
+    <h1>테스트</h1>
+
     <v-overlay
-      v-if="isLoading"
-      opacity="0"
+        v-if="isLoading"
+        opacity="0.5"
     >
-      <v-progress-circular
+    <v-progress-circular
         indeterminate
         size="64"
-        color="chiumColor"
-      />
+        color="primary"
+    />
     </v-overlay>
+
     <v-fade-transition mode="out-in">
       <router-view />
     </v-fade-transition>
+
   </div>
 </template>
 

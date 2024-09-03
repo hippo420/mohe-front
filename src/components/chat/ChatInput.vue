@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="input-box">
     <v-icon
       class="image-icon"

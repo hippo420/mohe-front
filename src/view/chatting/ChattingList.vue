@@ -7,11 +7,13 @@
   </div>
 </template>
 <script>
-import ChatAppBar from '@/components/chat/ChatAppBar.vue';
+//import ChatAppBar from '@/components/chat/ChatAppBar.vue';
 import ChatRoomList from '@/components/chat/ChatRoomList.vue';
+
 export default {
   components : {
-    ChatAppBar,ChatRoomList
+    //ChatAppBar,
+    ChatRoomList
   },
 }
 </script>

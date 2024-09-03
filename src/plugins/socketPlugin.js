@@ -12,47 +12,57 @@ import io from "socket.io-client";
 // transports에 websocket을 적어준 이유는 폴링방식 -> 소켓 방식으로 넘어가지않고
 // 바로 넘어가도록, withCredentials를 안주면 오류 발생..
 
-const socket =  io(`${process.env.VUE_APP_CHAT_API}`,{
-          transports: ["websocket"],
-          withCredentials: true,
-      });
+// 소켓 인스턴스 생성
+const socket = io(`${process.env.VUE_APP_CHAT_API}`, {
+  transports: ["websocket"],
+  withCredentials: true,
+});
 export default {
-  install(Vue) {
+  install(app) {
     // 전역에 소켓과 이벤트 리스너 설정
-    Vue.prototype.$socket = socket;
-    Vue.prototype.$socket.on('connect', () => {
-      store.state.Chat.sockets++
+    // 연결 이벤트 리스너 설정
+    socket.on('connect', () => {
+      store.state.Chat.sockets++;
     });
     // 굳이 함수를 만들고 그 안에 이벤트를 전송하거나 리스너를 선택한 이유는
     // 필요한 params 를 전달할 수 있는 방법을 찾이 못했다.( 단순히 나의 생각 )
     // 그래서 함수를 통해 params를 받은 뒤 그 param을 이벤트 리스너들에게 전달하는 방식을 선택
 
-    Vue.prototype.$enterRoom = (roomId) => {
-      Vue.prototype.$socket.emit('joinRoom',roomId)
+    // 메서드들을 app.config.globalProperties로 등록
+    app.config.globalProperties.$enterRoom = (roomId) => {
+      socket.emit('joinRoom', roomId);
     };
-    Vue.prototype.$chatSet = (fn) => {
-      Vue.prototype.$socket.on('chat',fn)
+
+    app.config.globalProperties.$chatSet = (fn) => {
+      socket.on('chat', fn);
     };
-    Vue.prototype.$leaveRoom = (roomId) => {
-      Vue.prototype.$socket.emit('leaveRoom',roomId)
+
+    app.config.globalProperties.$leaveRoom = (roomId) => {
+      socket.emit('leaveRoom', roomId);
     };
-    Vue.prototype.$disconnetFromServer = (fn) => {
-      Vue.prototype.$socket.on('disconnect',fn)
+
+    app.config.globalProperties.$disconnetFromServer = (fn) => {
+      socket.on('disconnect', fn);
     };
-    Vue.prototype.$reload = (fn) => {
-      Vue.prototype.$socket.on('reload',fn)
+
+    app.config.globalProperties.$reload = (fn) => {
+      socket.on('reload', fn);
     };
-    Vue.prototype.$reloadChatRooms = (fn) => {
-      Vue.prototype.$socket.on('reloadChatRooms',fn)
+
+    app.config.globalProperties.$reloadChatRooms = (fn) => {
+      socket.on('reloadChatRooms', fn);
     };
-    Vue.prototype.$deleteChat = (fn) => {
-      Vue.prototype.$socket.on('yesDelete',fn)
+
+    app.config.globalProperties.$deleteChat = (fn) => {
+      socket.on('yesDelete', fn);
     };
-    Vue.prototype.$deleteChatReloadRoomList = (fn) => {
-      Vue.prototype.$socket.on('yesDeleteForRoomList',fn)
+
+    app.config.globalProperties.$deleteChatReloadRoomList = (fn) => {
+      socket.on('yesDeleteForRoomList', fn);
     };
-    Vue.prototype.$imOnApp = (fn) => {
-      Vue.prototype.$socket.on('imOnApp',fn)
+
+    app.config.globalProperties.$imOnApp = (fn) => {
+      socket.on('imOnApp', fn);
     };
   },
 };

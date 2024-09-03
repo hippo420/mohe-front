@@ -1,4 +1,4 @@
-<template lang="">
+<template >
   <div>
     <div
       v-for="chat,idx in getNewChats"
